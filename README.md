@@ -1,5 +1,8 @@
 Xấy dựng Website mua bán Bất Động Sản 
 Người thực hiện Trần Thị Mỹ Duyên – lớp DK24TTC2.  
+Email: duyenttm131196@tvu-onschool.edu.vn
+Số điện thoại:0387442093
+
 Dự án xây dựng một website mua bán bất động sản với các chức năng cơ bản, phục vụ việc đăng tin rao bán và tìm kiếm bất động sản.
 
 ---
