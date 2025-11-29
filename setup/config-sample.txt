@@ -1,0 +1,33 @@
+# Sample configuration file for Website Bất Động Sản
+
+# ===========================
+# DATABASE CONFIGURATION
+# ===========================
+# Thay YOUR_SERVER_NAME bằng tên SQL Server của bạn
+# Thay authentication nếu dùng SQL Login
+
+server=YOUR_SERVER_NAME\SQLEXPRESS
+database=BDS
+authentication=Windows   # hoặc SQL
+username=
+password=
+
+# ===========================
+# WEBSITE SETTINGS
+# ===========================
+# Đường dẫn lưu ảnh tin đăng
+image_folder=~/images/
+
+# Dung lượng tối đa cho mỗi ảnh (MB)
+max_image_size=5
+
+# Cho phép nhiều ảnh
+allow_multiple_images=true
+
+# ===========================
+# ADMIN DEFAULT ACCOUNT
+# ===========================
+admin_username=admin
+admin_password=123456
+user_username=duyen131196
+user_password=123456
