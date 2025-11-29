@@ -1,0 +1,278 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Gdien.master.cs" Inherits="WebApplication1.Gdien" %>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website Bất Động Sản</title>
+
+    <!-- Bootstrap & jQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+
+        #myCarousel img {
+            height: 400px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* -------------------- SEARCH BOX HIỆN ĐẠI -------------------- */
+        .search-box {
+            position: relative;
+            margin: -70px auto 30px auto;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px 30px;
+            max-width: 1100px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .search-box label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .search-box .form-control {
+            border-radius: 8px;
+            height: 38px;
+        }
+
+        .btn-search-modern {
+            width: 100%;
+            height: 42px;
+            border-radius: 10px !important;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .search-box {
+            position: relative;
+            margin: 20px auto 40px auto !important;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px 30px;
+            max-width: 1100px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .caption-box {
+            background: rgba(0, 0, 0, 0.6); /* nền đen mờ */
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Xoá hoàn toàn khoảng trắng giữa navbar và carousel */
+        .navbar {
+            margin-bottom: 0 !important;
+            border-radius: 0 !important;
+        }
+        body, form {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="Default.aspx">
+                        <img src="images/hinh123.png" style="height:40px; margin-top:-10px;" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="nav navbar-nav" id="navbar" runat="server">
+                        <li class="active"><a href="Default.aspx">Trang chủ</a></li>
+                        <li><a href="NhaDatBan.aspx">Nhà Đất Bán</a></li>
+                        <li><a href="NhaChoThue.aspx">Nhà Đất cho Thuê</a></li>
+                        <li><a href="DuAn.aspx">Dự án</a></li>
+                        <li><a href="TinTuc.aspx">Tin Tức</a></li>
+                        <li><a href="GioiThieu.aspx">Giới thiệu</a></li>
+                    </ul>
+
+                    <div class="navbar-right navbar-right-section">
+                    <asp:HyperLink ID="linkDangTin" runat="server" CssClass="btn btn-warning navbar-btn"
+                        NavigateUrl="~/DangTin.aspx" Style="margin-left: 10px;">
+                        Đăng Tin
+                  </asp:HyperLink>
+                  <asp:HyperLink ID="linkDangNhap" runat="server" CssClass="btn btn-warning navbar-btn"
+                        NavigateUrl="~/DangNhap.aspx" Style="margin-left: 10px;">
+                        Đăng Nhập
+                    </asp:HyperLink>
+                   <asp:HyperLink ID="linkDangKy" runat="server" CssClass="btn btn-warning navbar-btn"
+                        NavigateUrl="~/Dangky.aspx" Style="margin-left: 10px;">
+                        Đăng Ký
+                    </asp:HyperLink>
+                        <!-- USER PROFILE DROPDOWN -->
+                    <div class="btn-group" style="margin-left:10px;">
+                        <asp:LinkButton ID="linkUserProfile" runat="server"
+                            CssClass="btn btn-info dropdown-toggle navbar-btn"
+                            data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span id="lblUserName" runat="server"></span>
+                            <span class="caret"></span>
+                        </asp:LinkButton>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <asp:HyperLink ID="linkProfile" runat="server" NavigateUrl="idl" Text="Trang cá nhân"></asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="lnkQuanLyTin" runat="server" NavigateUrl="idq">Quản lý tin đăng</asp:HyperLink>
+                        </li>
+
+                        <li><hr class="dropdown-divider" /></li> <!-- đã sửa -->
+
+                        <li>
+                            <asp:LinkButton ID="btnLogoutInside" runat="server" OnClick="linkDangXuat_Click" CssClass="btn-link" Style="margin-left:15px;">
+                                Đăng xuất
+                            </asp:LinkButton>
+                        </li>
+                    </ul>
+
+                    </div>
+
+                       <asp:LinkButton ID="linkDangXuat" runat="server" CssClass="btn btn-danger navbar-btn"
+                            OnClick="linkDangXuat_Click" Style="margin-left: 10px;">
+                            Đăng Xuất
+                        </asp:LinkButton>
+                        </div>
+
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- CAROUSEL -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"> </li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                  <div class="item active">
+                    <img src="https://cdn.homedy.com/store/images/2018/10/31/phoi-canh-apec-phu-yen-2-636765791422322491.jpg" />
+                    <div class="carousel-caption">
+                        <h3 class="caption-box">Website bất động sản</h3>
+                    </div>
+                </div>
+
+
+                <div class="item">
+                    <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/580541347.jpg?k=17f53c5814913673db558cf73f3ec5d3b4f039dc28f92ab91a2d94a0b7e8406f&o=&hp=1" />
+                         <div class="carousel-caption">
+                            <h3 class="caption-box">Dễ dàng tìm kiếm</h3>                      
+                </div>
+                 </div>
+
+                <div class="item">
+                    <img src="https://datphuyen.com/wp-content/uploads/2022/07/apec-mandala-wyndham-phu-yen-1.jpg" />
+                       <div class="carousel-caption">   
+                    <h3 class="caption-box">Mua bán dễ dàng</h3>
+                    
+                </div>
+                </div>
+                </div>
+
+          
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
+        </div>
+
+        <!-- 🔎 SEARCH BOX HIỆN ĐẠI -->
+        <div class="search-box">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6">
+                    <label>Từ khóa</label>
+                    <asp:TextBox ID="txtKey2" runat="server" CssClass="form-control" placeholder="Nhập từ khóa..."></asp:TextBox>
+                </div>
+
+                <div class="col-md-2 col-sm-6">
+                    <label>Loại giao dịch</label>
+                    <asp:DropDownList ID="ddlLoaiGD2" runat="server" CssClass="form-control">
+                        <asp:ListItem Text="Tất cả" Value=""></asp:ListItem>
+                        <asp:ListItem Text="Bán" Value="ban"></asp:ListItem>
+                        <asp:ListItem Text="Cho thuê" Value="thue"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div class="col-md-2 col-sm-6">
+                    <label>Loại BĐS</label>
+                    <asp:DropDownList ID="ddlLoaiBDS2" runat="server" CssClass="form-control">
+                        <asp:ListItem Text="Tất cả" Value=""></asp:ListItem>
+                        <asp:ListItem Text="Nhà phố" Value="nhapho"></asp:ListItem>
+                        <asp:ListItem Text="Đất" Value="dat"></asp:ListItem>
+                        <asp:ListItem Text="Căn hộ" Value="canho"></asp:ListItem>
+                        <asp:ListItem Text="Biệt thự" Value="bietthu"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div class="col-md-2 col-sm-6">
+                    <label>Tỉnh/Thành</label>
+                    <asp:DropDownList ID="ddlTinh2" runat="server" CssClass="form-control">
+                        <asp:ListItem Text="Tất cả" Value=""></asp:ListItem>
+                        <asp:ListItem Text="Hà Nội" Value="hanoi"></asp:ListItem>
+                        <asp:ListItem Text="Hồ Chí Minh" Value="hcm"></asp:ListItem>
+                        <asp:ListItem Text="Đà Nẵng" Value="danang"></asp:ListItem>
+                        <asp:ListItem Text="Phú Yên" Value="phuyen"></asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+
+                <div class="col-md-3 col-sm-12" style="margin-top: 25px;">
+                    <asp:Button ID="btnSearch2" runat="server" CssClass="btn btn-primary btn-search-modern"
+                        Text="Tìm kiếm" OnClick="btnSearch2_Click" />
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BODY CONTENT -->
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="container-fluid text-center">
+            <p>© 2025 Website Bất Động Sản <br>
+                Hỗ trợ: Trần Thị Mỹ Duyên <br>
+                Điện thoại: 0387442093
+            </p>
+        </footer>
+
+    </form>
+</body>
+</html>
